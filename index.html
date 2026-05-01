@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rodrigo Panel</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Orbitron',sans-serif;
+  background:#050507;
+  color:white;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  padding:20px 40px;
+  align-items:center;
+}
+
+.logo{
+  font-size:22px;
+}
+.logo span{
+  color:#f7b500;
+}
+
+nav a{
+  margin:0 15px;
+  color:white;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.hero{
+  text-align:center;
+  padding:40px 20px;
+  background:radial-gradient(circle,#1a0033,#000);
+}
+
+.hero img{
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  border:5px solid #8a2be2;
+  box-shadow:0 0 30px #8a2be2;
+}
+
+.hero h1{
+  margin-top:20px;
+  font-size:40px;
+}
+
+.hero span{
+  color:#f7b500;
+}
+
+.socials{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  margin-top:30px;
+  flex-wrap:wrap;
+}
+
+.social{
+  background:#0f0f15;
+  padding:15px 25px;
+  border-radius:10px;
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.social:hover{
+  box-shadow:0 0 15px #8a2be2;
+  transform:translateY(-5px);
+}
+
+.products{
+  padding:50px 20px;
+  text-align:center;
+}
+
+.products h2{
+  font-size:28px;
+  margin-bottom:30px;
+}
+
+.products span{
+  color:#f7b500;
+}
+
+.cards{
+  display:flex;
+  justify-content:center;
+  gap:25px;
+  flex-wrap:wrap;
+}
+
+.card{
+  background:#0d0d14;
+  border-radius:15px;
+  width:320px;
+  padding:20px;
+  transition:0.3s;
+  box-shadow:0 0 15px rgba(138,43,226,0.4);
+}
+
+.card:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 25px #8a2be2;
+}
+
+.card img{
+  width:100%;
+  border-radius:10px;
+}
+
+.card h3{
+  margin:15px 0;
+}
+
+.price{
+  color:#f7b500;
+  font-size:26px;
+  margin:15px 0;
+  text-align:center;
+  font-weight:bold;
+  background:rgba(247,181,0,0.1);
+  padding:8px;
+  border-radius:8px;
+  box-shadow:0 0 10px rgba(247,181,0,0.3);
+}
+
+.btn{
+  display:inline-block;
+  background:#f7b500;
+  color:black;
+  padding:12px 20px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:#ffd84d;
+  transform:scale(1.05);
+}
+
+.whatsapp-float{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25d366;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  color:white;
+  box-shadow:0 0 15px #25d366;
+  text-decoration:none;
+}
+.metodos-btn{
+  display:block;
+  margin:40px auto;
+  background:#8a2be2;
+  color:white;
+  padding:14px 25px;
+  border:none;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 0 15px #8a2be2;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-content{
+  background:#0d0d14;
+  padding:30px;
+  border-radius:15px;
+  width:90%;
+  max-width:400px;
+  text-align:center;
+  box-shadow:0 0 20px #8a2be2;
+}
+
+.modal-content h3{
+  margin-bottom:20px;
+}
+
+.country{
+  display:block;
+  margin:10px 0;
+  padding:12px;
+  background:#f17807;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.country:hover{
+  background:#8a2be2;
+}
+
+.close{
+  margin-top:15px;
+  background:rgb(5, 240, 240);
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+
+
+/* GALERÍA DE PRUEBAS */
+.galeria-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:999;}
+.galeria-content{background:#0d0d14;padding:20px;border-radius:15px;width:95%;max-width:700px;box-shadow:0 0 20px #8a2be2;}
+.galeria-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:15px;max-height:400px;overflow:auto;}
+.galeria-grid img{width:100%;border-radius:10px;}
+.upload-btn{margin-top:10px;background:#f7b500;color:black;padding:10px;border-radius:8px;cursor:pointer;display:inline-block;}
+
+
+
+/* BENEFICIOS */
+.beneficios{
+  padding:40px 20px;
+  text-align:center;
+}
+
+.beneficios-grid{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.beneficio{
+  background:#0d0d14;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 0 15px rgba(138,43,226,0.4);
+  transition:0.3s;
+  font-weight:bold;
+}
+
+.beneficio:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 25px #8a2be2;
+}
+
+
+
+/* OFERTA */
+.oferta{
+  text-align:center;
+  padding:30px 20px;
+  background:linear-gradient(90deg,#1a0033,#000);
+  box-shadow:0 0 20px #8a2be2;
+}
+
+.oferta h2{
+  color:#f7b500;
+  margin-bottom:10px;
+  text-shadow:0 0 15px #f7b500;
+}
+
+#contador{
+  font-size:28px;
+  font-weight:bold;
+  margin-top:10px;
+  color:#00ffcc;
+  text-shadow:0 0 10px #00ffcc;
+}
+
+
+
+/* TRAILER GAMER */
+.trailer{position:relative;height:100vh;overflow:hidden}
+.trailer img{width:100%;height:100%;object-fit:cover;animation:zoomFondo 12s ease-in-out infinite alternate}
+@keyframes zoomFondo{from{transform:scale(1)}to{transform:scale(1.1)}}
+.overlay{position:absolute;inset:0;background:rgba(0,0,0,.6)}
+.contenido-trailer{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:#fff}
+.contenido-trailer h1{font-size:52px;color:#00ffcc;text-shadow:0 0 20px #00ffcc,0 0 40px #00ffcc;animation:glow 1.5s infinite alternate}
+.contenido-trailer p{font-size:20px;margin:10px 0;color:#f7b500;text-shadow:0 0 10px #f7b500}
+.contenido-trailer button{padding:12px 26px;background:#ff0000;border:none;color:#fff;font-weight:700;border-radius:10px;cursor:pointer;box-shadow:0 0 15px red;transition:.3s}
+.contenido-trailer button:hover{transform:scale(1.1);box-shadow:0 0 30px red}
+@keyframes glow{from{opacity:.7}to{opacity:1}}
+
+
+
+/* VIDEO MODAL NORMAL */
+.video-modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.videos-container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+}
+
+.videos-container video{
+  width:90%;
+  max-width:700px;
+  border-radius:10px;
+}
+
+.videos-container{
+  width:100%;
+  height:100%;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
+}
+
+.videos-container video{
+  width:100%;
+  height:100vh;
+  object-fit:cover;
+  scroll-snap-align:start;
+}
+
+.video-modal video{
+  width:90%;
+  max-width:600px;
+  border-radius:10px;
+}
+
+
+
+/* REFERENCIAS */
+.referencias{ text-align:center; padding:40px; }
+.galeria{ display:flex; flex-wrap:wrap; justify-content:center; gap:15px; }
+.galeria img{ width:200px; border-radius:10px; box-shadow:0 0 10px rgba(0,255,204,0.3); transition:.3s; cursor:pointer; }
+.galeria img:hover{ transform:scale(1.05); }
+
+/* Separación de botones */
+.btn{ margin-top:10px; }
+button{ margin-top:12px; }
+
+
+
+/* INDICADOR VER MÁS */
+.scroll-down{
+  position:absolute;
+  bottom:25px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#fff;
+  font-size:20px;
+  font-weight:bold;
+  text-align:center;
+  cursor:pointer;
+  animation:rebote 1.2s infinite;
+  text-shadow:0 0 10px #f7b500, 0 0 20px #f7b500;
+}
+
+.scroll-down span{
+  display:block;
+  font-size:32px;
+  margin-top:5px;
+}
+
+@keyframes rebote{
+  0%{transform:translate(-50%,0)}
+  50%{transform:translate(-50%,12px)}
+  100%{transform:translate(-50%,0)}
+}
+
+.scroll-down span{
+  display:block;
+  font-size:20px;
+}
+
+@keyframes fadeMove{
+  0%{opacity:0; transform:translate(-50%,0)}
+  50%{opacity:1; transform:translate(-50%,10px)}
+  100%{opacity:0; transform:translate(-50%,20px)}
+}
+
+
+
+/* REFERENCIAS MODAL */
+.ref-container{display:flex;justify-content:center;align-items:center;width:100%}
+.ref-container img{width:90%;max-width:500px;border-radius:12px;box-shadow:0 0 20px rgba(0,0,0,.7);cursor:pointer}
+
+
+
+/* PARTICULAS */
+#particles{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:-1;
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<header>
+  <div class="logo">RODRIGO <span>PANEL</span></div>
+  <nav>
+    <a href="#">Inicio</a>
+    <a href="#productos">Productos</a>
+    <a href="#">Sobre mí</a>
+    <a href="#">Contacto</a>
+  </nav>
+</header>
+
+<!-- TRAILER GAMER -->
+<section class="trailer">
+  <img src="imagenes/intro1.jpeg">
+  <div class="overlay"></div>
+  <div class="contenido-trailer">
+    <h1>RODRIGO PANEL</h1>
+    <p>🔥 DOMINA CADA PARTIDA 🔥</p>
+    <button onclick="window.location='#productos'">COMPRAR AHORA</button>
+  </div>
+  <div class="scroll-down" onclick="scrollToProductos()">
+    Ver más abajo
+    <span>⬇</span>
+  </div>
+</section>
+
+<!-- OFERTA LIMITADA -->
+<section class="oferta">
+  <h2>🔥 OFERTA POR TIEMPO LIMITADO 🔥</h2>
+  <p>Aprovecha descuentos exclusivos antes de que termine</p>
+  <div id="contador">00:00:00</div>
+</section>
+
+<section class="hero">
+  <img src="imagenes/imagen1.jpeg" alt="perfil">
+  <h1>RODRIGO <span>PANEL</span></h1>
+
+  <div class="socials">
+    <a href="https://wa.me/51952775386" target="_blank" class="btn">WhatsApp</a>
+    <a href="https://www.instagram.com/soyrodrigopt" target="_blank" class="btn">Instagram</a>
+    <a href="https://www.tiktok.com/@rodrigopanel" target="_blank" class="btn">TikTok</a>
+    <a href="https://discord.gg/Rwc2prT2" target="_blank" class="btn">Discord</a>
+    <a href="https://whatsapp.com/channel/0029VaDaFmXDjiOWR094G03v" target="_blank" class="btn gratis">
+  🎁 ACESSO GRATIS</a>
+  <button class="metodos-btn" onclick="abrirGaleria()">📸 VER PRUEBAS / REFERENCIAS</button>
+</div>
+</section>
+
+<!-- BENEFICIOS -->
+<section class="beneficios">
+  <div class="beneficios-grid">
+    <div class="beneficio">🔥 +500 Clientes Satisfechos</div>
+    <div class="beneficio">⚡ Entrega Inmediata</div>
+    <div class="beneficio">🛠 Soporte 24/7</div>
+    <div class="beneficio">🔄 Actualizaciones Constantes</div>
+  </div>
+</section>
+
+<section class="products">
+  <h2>PRODUCTOS <span>DESTACADOS</span></h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <img src="imagenes/holograma1.jpeg">
+      <h3>Android</h3>
+      <p>Con este prodcuto podras tener vision de todos los enemigos,ya sea sus armas o
+        cuerpo completo,tengo para free fire normal y ff max.
+      </p>
+      <div class="price">S/ 30 - $ 20</div>
+      
+      <a href="https://wa.me/51952775386" target="_blank" class="btn">Comprar por WhatsApp</a>
+      <a class="btn" href="https://youtube.com/shorts/s0ksN9-5Nsw?si=ZK9xCChuMyAEKQ8O" target="_blank">🎬 Ver Video</a>
+
+    </div>
+
+    <div class="card">
+      <img src="imagenes/bypas.jpeg">
+      <h3>Pc o Lapto</h3>
+      <p>El bypass te ayudara a emparejar con puros moviles lo cual ya no te emparejara con hakers y tendras gran ventaja de ganar tus partidas.</p>
+      <div class="price">S/ 35 - $ 20</div>
+      <a href="https://wa.me/51952775386" target="_blank" class="btn">Comprar por WhatsApp</a>
+      <a class="btn" href="https://youtube.com/shorts/OW1EgVsIe6c?si=7GHJ5Q1yBYJJmvDQ" target="_blank">🎬 Ver Video</a>
+
+    </div>
+
+    <div class="card">
+      <img src="imagenes/flou.jpeg">
+      <h3>Iphone</h3>
+      <p>Este panel lo usan muchos streamers conocidos,principalmente cuenta con 
+        aimbot,lineas,autopuntado,y muchas funciones más.</p>
+      <div class="price">S/ 120 - $ 50</div>
+      <a href="https://wa.me/51952775386" target="_blank" class="btn">Comprar por WhatsApp</a>
+      <a class="btn" href="https://youtu.be/uwxSnEEaHU0?si=WDr-NW7PQPoaAUhF" target="_blank">🎬 Ver Video</a>
+
+    </div>
+
+<div class="card">
+      <img src="imagenes/drip.jpeg">
+      <h3>Android</h3>
+      <p>Panel para cuenta secundaria,lo mas vendido y recomendado para acarrear cuentas ,podras pegar todo rojo, 
+        tener lineas, autopuntado y mucho mas.</p>
+      <div class="price">S/ 10 - $ 3</div>
+      <a href="https://wa.me/51952775386" target="_blank" class="btn">Comprar por WhatsApp</a>
+      <a class="btn" href="https://youtu.be/X-R6Ts5xTNc?si=_KdxTva_l3QyyRTx" target="_blank">🎬 Ver Video</a>
+
+    </div>
+
+<div class="card">
+      <img src="imagenes/dead.jpeg">
+      <h3>Pc o Lapto</h3>
+      <p>Panel para pc descarado para acarrear y subir cuentas facilmente,cuenta con aimbot todo rojo,speed,lineas ,autoapuntado
+        y muchas funciones más.</p>
+      <div class="price">S/ 35 - $ 20</div>
+      <a href="https://wa.me/51952775386" target="_blank" class="btn">Comprar por WhatsApp</a>
+      <a class="btn" href="https://youtube.com/shorts/Wr49yBtlJhM?si=W-Ruhf6TMJmvUgp1" target="_blank">🎬 Ver Video</a>
+
+    </div>
+
+<div class="cards">
+
+    <div class="card">
+      <img src="imagenes/red.jpeg">
+      <h3>Redes</h3>
+      <p>Aumentaras de vistas ,seguidores o likes en cualquier red social ya sea tiktok,youtube,instagram,etc.</p>
+      <div class="price">S/ 10 - $ 10</div>
+      <a href="https://wa.me/51952775386" target="_blank" class="btn">Comprar por WhatsApp</a>
+      <a class="btn" href="https://www.youtube.com/watch?v=VIDEO_ID" target="_blank">🎬 Ver Video</a>
+
+    </div>
+
+
+<div class="cards">
+
+    <div class="card">
+      <img src="imagenes/fake.jpeg">
+      <h3>Android</h3>
+      <p>Con este panel podras congelar a los enemigos,teletrasportarte de un lugar a otro y por ultimo pegar detras de las paredes</p>
+      <div class="price">S/ 30 - $ 20</div>
+      <a href="https://wa.me/51952775386" target="_blank" class="btn">Comprar por WhatsApp</a>
+      <a class="btn" href="https://youtu.be/hPbk7gT4XRk?si=pGaxctbVZYFNFk33" target="_blank">🎬 Ver Video</a>
+
+    </div>
+
+  </div>
+</section>
+
+<button class="metodos-btn" onclick="abrirModal()">VER 💳MÉTODOS DE PAGO💳 POR PAÍS</button>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h3>Selecciona tu país</h3>
+
+    <div class="country" onclick="irPago('peru')">🇵🇪 Perú</div>
+    <div class="country" onclick="irPago('mexico')">🇲🇽 México</div>
+    <div class="country" onclick="irPago('argentina')">🇦🇷 Argentina</div>
+    <div class="country" onclick="irPago('chile')">🇨🇱 Chile</div>
+    <div class="country" onclick="irPago('costa rica')">Costa Rica</div>
+    <div class="country" onclick="irPago('ecuador')">Ecuador</div>
+    <div class="country" onclick="irPago('nicaragua')">Nicaragua</div>
+    <div class="country" onclick="irPago('panamá')">Panamá</div>
+    <div class="country" onclick="irPago('paraguay')">Paraguay</div>
+    <div class="country" onclick="irPago('uruguay')">Uruguay</div>
+    <div class="country" onclick="irPago('bolivia')">Bolivia</div>
+    <div class="country" onclick="irPago('colombia')">Colombia</div>
+    <div class="country" onclick="irPago('venezuela')">Venezuela</div>
+    <div class="country" onclick="irPago('estados unidos')">Estados Unidos</div>
+    <div class="country" onclick="irPago('brasil')">Brasil</div>
+    <div class="country" onclick="irPago('república dominicana')">República Dominicana</div>
+    <div class="country" onclick="irPago('guatemala')">Guatemala</div>
+
+    <button class="close" onclick="cerrarModal()">Cerrar</button>
+  
+</div>
+
+</div>
+</div>
+
+<!-- GALERÍA -->
+<div class="galeria-modal" id="galeria">
+  <div class="galeria-content">
+    <h2>📸 PRUEBAS / REFERENCIAS</h2>
+    
+    <input type="file" id="subirImg" accept="image/*" multiple style="display:none;">
+    <label for="subirImg" class="upload-btn">➕ Subir imágenes</label>
+
+    <div class="galeria-grid" id="grid"></div>
+
+    <button class="close" onclick="cerrarGaleria()">Cerrar</button>
+  </div>
+</div>
+
+<a href="https://wa.me/51952775386" class="whatsapp-float" target="_blank">💬</a>
+
+<script>
+function scrollToProductos(){
+  document.getElementById('productos').scrollIntoView({behavior:'smooth'});
+}
+
+
+</script>
+
+<a href="https://wa.me/51952775386" class="whatsapp-float" target="_blank">💬</a>
+
+
+
+<!-- VIDEO MODAL TIKTOK -->
+
+</div>
+
+<script>
+// Eliminado sistema de video pesado, ahora se usan enlaces de YouTube;
+
+  contenedor.appendChild(video);
+  modal.style.display = "flex";
+
+
+// cerrar al hacer click fuera
+const modal = document.getElementById("videoModal");
+if(modal){
+  modal.onclick = function(e){
+    if(e.target.id === "videoModal"){
+      this.style.display = "none";
+    }
+  }
+};
+
+  contenedor.appendChild(video);
+  modal.style.display = "flex";
+
+
+// cerrar modal
+document.getElementById("videoModal").onclick = function(e){
+  if(e.target.id === "videoModal"){
+    this.style.display = "none";
+    const v = this.querySelector("video");
+    if(v) v.pause();
+  }
+};
+</script>
+
+
+
+<!-- SECCION REFERENCIAS -->
+
+
+<script>
+function abrirVideo(src){
+  const modal = document.getElementById("videoModal");
+  const contenedor = document.querySelector(".videos-container");
+
+  contenedor.innerHTML = "";
+
+  const v = document.createElement("video");
+  v.src = src;
+  v.autoplay = true;
+  v.loop = false;
+  v.muted = true;
+  v.controls = true;
+  v.style.width = "90%";
+  v.style.maxWidth = "700px";
+  v.style.display = "block";
+  v.style.margin = "auto";
+
+  v.onended = function(){
+    modal.style.display = "none";
+  };
+
+  contenedor.appendChild(v);
+  modal.style.display = "flex";
+}
+
+// cerrar al hacer click fuera
+const modal = document.getElementById("videoModal");
+if(modal){
+  modal.onclick = function(e){
+    if(e.target.id === "videoModal"){
+      this.style.display = "none";
+    }
+  }
+}
+
+// cerrar con ESC
+window.addEventListener("keydown", function(e){
+  if(e.key === "Escape"){
+    const m = document.getElementById("videoModal");
+    if(m) m.style.display = "none";
+  }
+});
+</script>
+
+<script>
+function scrollToProductos(){
+  const seccion = document.getElementById('productos');
+  if(seccion){
+    seccion.scrollIntoView({behavior:'smooth'});
+  }
+}
+</script>
+
+
+function abrirReferencias(lista){
+  const modal=document.getElementById("refModal");
+  const img=document.getElementById("imgRef");
+
+  imagenes = lista;
+  indexRef = 0;
+
+  img.src = imagenes[indexRef];
+  modal.style.display="flex";
+}
+
+document.getElementById("refModal").onclick=function(){
+  indexRef++;
+  if(indexRef>=imagenes.length){
+    this.style.display="none";
+    indexRef=0;
+  }else{
+    document.getElementById("imgRef").src=imagenes[indexRef];
+  }
+};
+</script>
+
+
+
+<!-- MODAL REFERENCIAS -->
+<div id="refModal" class="video-modal">
+  <div class="ref-container">
+    <img id="imgRef" src="">
+  </div>
+</div>
+
+<script>
+let imagenes=[
+  "imagenes/wsp1.jpg",
+  "imagenes/wsp2.jpg",
+  "imagenes/wsp3.jpg"
+];
+let indexRef=0;
+
+function abrirReferencias(){
+  const modal=document.getElementById("refModal");
+  const img=document.getElementById("imgRef");
+  indexRef=0;
+  img.src=imagenes[indexRef];
+  modal.style.display="flex";
+}
+
+document.getElementById("refModal").onclick=function(){
+  indexRef++;
+  if(indexRef>=imagenes.length){
+    this.style.display="none";
+    indexRef=0;
+  }else{
+    document.getElementById("imgRef").src=imagenes[indexRef];
+  }
+};
+</script>
+
+
+
+<script>
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<60;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    size:Math.random()*3,
+    speedY:Math.random()*1+0.5
+  });
+}
+
+function animateParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.y-=p.speedY;
+    if(p.y<0){
+      p.y=canvas.height;
+      p.x=Math.random()*canvas.width;
+    }
+    ctx.fillStyle="rgba(247,181,0,0.7)";
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(animateParticles);
+}
+
+animateParticles();
+
+window.addEventListener("resize",()=>{
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+});
+</script>
+
+</body>
+</html>DOC
